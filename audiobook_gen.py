@@ -21,7 +21,8 @@ def convert_to_mp3(content, filename):
     # a new engine is being created
     engine = pyttsx3.init()
 
-    # changing the voice of the audio
+    # changing the voice of the audio   
+    
     voices = engine.getProperty("voices")
     if len(voices) == 0:
         print("Unable to find any convertable voice on your system.")
@@ -29,6 +30,12 @@ def convert_to_mp3(content, filename):
 
     voice = voices[1] if len(voices) > 1 else voices[0]
     engine.setProperty("voice", voice.id)
+
+    #changing volume
+    volume = engine.getProperty('volume')
+    print ("initial volume:  %s" %volume )  #print initial volume level
+    engine.setProperty('volume', 1.0)
+
 
     # creating the audio(mp3) file of the pdf content
     engine.save_to_file(content, f"./{filename}.mp3")
